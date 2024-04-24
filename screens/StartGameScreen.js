@@ -3,7 +3,7 @@ import { useState } from "react";
 import Title from "../components/ui/Title";
 import Card from "../components/ui/Card";
 import InstructionText from "../components/ui/InstructionText";
-
+import { StatusBar } from "expo-status-bar";
 const {
   View,
   TextInput,
@@ -44,35 +44,42 @@ function StartGameScreen({ onPickNumber }) {
   const marginTopDistance = height < 380 ? 100 : 30;
 
   return (
-    <ScrollView style={styles.screen}>
-      <KeyboardAvoidingView style={styles.screen} behavior="position">
-        <View style={[styles.rootContainer, { marginTop: marginTopDistance }]}>
-          <Title>Guess My Number</Title>
-          <Card>
-            <InstructionText>Enter a Number</InstructionText>
-            <TextInput
-              style={styles.numberInput}
-              maxLength={2}
-              keyboardType="number-pad"
-              autoCapitalize="none"
-              autoCorrect={false}
-              onChangeText={numberInputHandler}
-              value={enteredNumber}
-            />
-            <View style={styles.buttonsContainer}>
-              <View style={styles.buttonContainer}>
-                <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+    <>
+      <StatusBar style="auto" />
+      <ScrollView style={styles.screen}>
+        <KeyboardAvoidingView style={styles.screen} behavior="position">
+          <View
+            style={[styles.rootContainer, { marginTop: marginTopDistance }]}
+          >
+            <Title>Guess My Number</Title>
+            <Card>
+              <InstructionText>Enter a Number</InstructionText>
+              <TextInput
+                style={styles.numberInput}
+                maxLength={2}
+                keyboardType="number-pad"
+                autoCapitalize="none"
+                autoCorrect={false}
+                onChangeText={numberInputHandler}
+                value={enteredNumber}
+              />
+              <View style={styles.buttonsContainer}>
+                <View style={styles.buttonContainer}>
+                  <PrimaryButton onPress={resetInputHandler}>
+                    Reset
+                  </PrimaryButton>
+                </View>
+                <View style={styles.buttonContainer}>
+                  <PrimaryButton onPress={confirmInputHandler}>
+                    Confirm
+                  </PrimaryButton>
+                </View>
               </View>
-              <View style={styles.buttonContainer}>
-                <PrimaryButton onPress={confirmInputHandler}>
-                  Confirm
-                </PrimaryButton>
-              </View>
-            </View>
-          </Card>
-        </View>
-      </KeyboardAvoidingView>
-    </ScrollView>
+            </Card>
+          </View>
+        </KeyboardAvoidingView>
+      </ScrollView>
+    </>
   );
 }
 
